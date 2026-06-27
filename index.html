@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Elijah ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ffb6d9,#ffd6f5,#fff8cc);
+}
+
+/* Container */
+.container{
+    text-align:center;
+    position:relative;
+}
+
+/* Envelope */
+.envelope{
+    width:250px;
+    height:170px;
+    position:relative;
+    cursor:pointer;
+    margin:auto;
+}
+
+/* Letter */
+.letter{
+    position:absolute;
+    width:210px;
+    height:300px;
+    background:white;
+    left:20px;
+    top:30px;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    transition:1.6s ease;
+    z-index:1;
+    overflow:auto;
+}
+
+.letter h2{
+    color:#ff4f81;
+    margin-bottom:15px;
+}
+
+.letter p{
+    color:#555;
+    line-height:1.5;
+    font-size:15px;
+}
+
+/* Envelope Base */
+.base{
+    position:absolute;
+    bottom:0;
+    width:250px;
+    height:140px;
+    background:#ff6f91;
+    border-radius:0 0 12px 12px;
+    z-index:3;
+}
+
+/* Envelope Flap */
+.flap{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:125px solid transparent;
+    border-right:125px solid transparent;
+    border-top:90px solid #ff4f81;
+    transform-origin:top;
+    transition:1s;
+    z-index:5;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+    transform:translateY(-220px);
+}
+
+/* Floating Objects */
+.confetti,
+.heart,
+.balloon{
+    position:absolute;
+    user-select:none;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@keyframes balloonFloat{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="envelope" id="envelope" onclick="celebrate()">
+
+<div class="letter">
+<h2>🎉 Happy Birthday Elijah! 🎉</h2>
+
+<p>
+
+I hope you have the most amazing birthday ever!
+
+May your day be filled with laughter, happiness, unforgettable memories, and everything you've wished for.
+
+You deserve every blessing today and always.
+
+I hope you enjoy every single moment of your special day.
+
+Thank you for being such an amazing person.
+
+❤️ I love you so much. ❤️
+
+Happy Birthday!
+
+🥳🎂🎈
+
+</p>
+
+</div>
+
+<div class="flap"></div>
+
+<div class="base"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let opened=false;
+
+function celebrate(){
+
+if(opened) return;
+
+opened=true;
+
+document.getElementById("envelope").classList.add("open");
+
+for(let i=0;i<180;i++){
+createConfetti();
+}
+
+for(let i=0;i<80;i++){
+createHeart();
+}
+
+for(let i=0;i<25;i++){
+setTimeout(createBalloon,i*250);
+}
+
+}
+
+/* Confetti */
+
+function createConfetti(){
+
+const piece=document.createElement("div");
+
+piece.className="confetti";
+
+piece.style.left=Math.random()*100+"vw";
+
+piece.style.width="10px";
+piece.style.height="10px";
+
+piece.style.background=`hsl(${Math.random()*360},100%,60%)`;
+
+piece.style.animation=`fall ${3+Math.random()*3}s linear forwards`;
+
+document.body.appendChild(piece);
+
+setTimeout(()=>{
+piece.remove();
+},6000);
+
+}
+
+/* Hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(18+Math.random()*20)+"px";
+
+heart.style.animation=`fall ${4+Math.random()*3}s linear forwards`;
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},7000);
+
+}
+
+/* Balloons */
+
+function createBalloon(){
+
+const balloon=document.createElement("div");
+
+balloon.className="balloon";
+
+const balloons=["🎈","🎈","🎈","🎈","🎈"];
+
+balloon.innerHTML=balloons[Math.floor(Math.random()*balloons.length)];
+
+balloon.style.left=Math.random()*100+"vw";
+
+balloon.style.bottom="-80px";
+
+balloon.style.fontSize=(35+Math.random()*20)+"px";
+
+balloon.style.animation=`balloonFloat ${7+Math.random()*4}s linear forwards`;
+
+document.body.appendChild(balloon);
+
+setTimeout(()=>{
+balloon.remove();
+},11000);
+
+}
+
+</script>
+
+</body>
+</html>
